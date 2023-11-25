@@ -12,6 +12,9 @@ cd ..
 
 colcon build
 
+
+run with this command:
+
 ros2 launch deeptag_ros deeptag.launch.py 
 
 ## dependencies
