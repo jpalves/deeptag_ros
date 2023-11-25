@@ -1,4 +1,3 @@
-<meta name="google-site-verification" content="r1J5qV1tncPa0SX7ew54RYFi2GUD2U4hgAsKzSAITPs" />
 # deeptag_ros
 
 ...
