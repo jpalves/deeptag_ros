@@ -16,6 +16,7 @@ ros2 launch deeptag_ros deeptag.launch.py
 
 ## dependencies
 OpenCV 4
+
 Pytorch 1.13
 
 
