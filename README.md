@@ -1,6 +1,6 @@
 # deeptag_ros
 João Pedro Alves 2023
-<img src="image/image.png" alt="" height="200"/>
+<img src="image/image.png" alt="" height="800"/>
 ## How to run
 install ros2
 
