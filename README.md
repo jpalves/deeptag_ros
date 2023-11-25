@@ -1,5 +1,5 @@
 # deeptag_ros
-João Pedro Alves 2023
+João Pedro Alves 2023 - This is a wrapper for https://github.com/herohuyongtao/deeptag-pytorch for ROS2
 <img src="image/image.png" alt="" height="500" width="800" />
 ## How to run
 install ros2
