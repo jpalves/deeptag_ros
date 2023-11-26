@@ -17,11 +17,12 @@ run with this command:
 
 ros2 launch deeptag_ros deeptag.launch.py 
 
-## dependencies
+## Dependencies
 OpenCV 4
 
 Pytorch 1.13
 
+Python 3.10
 
 ## Terms of use
 The source code is provided for research purposes only. Any commercial use is prohibited. When using the code in your research work, please cite the following paper:
