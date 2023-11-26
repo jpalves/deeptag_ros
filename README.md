@@ -2,7 +2,7 @@
 João Pedro Alves 2023 - This is a wrapper for deeptag-pytorch (https://github.com/herohuyongtao/deeptag-pytorch) for ROS2
 <img src="image/image.png" alt="" height="500" width="800" />
 ## How to run
-install ros2 humble the configuration file is in the config folder, change the topics of camera for you camera. it's configured for Apriltags h11.
+install ros2 humble the configuration file is in the config folder, change the topics of camera for you camera. it's configured for Apriltags 36h11.
 
 cd ros2_ws/src
 
