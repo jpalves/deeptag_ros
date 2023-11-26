@@ -20,7 +20,7 @@ from sensor_msgs.msg import CameraInfo, CompressedImage
 from geometry_msgs.msg import TransformStamped
 from std_msgs.msg import String
 import message_filters
-from rclpy.qos import qos_profile_sensor_data, QoSProfile
+from rclpy.qos import QoSProfile
 from tf2_ros import TransformBroadcaster
 from deeptag_model_setting import load_deeptag_models
 from marker_dict_setting import load_marker_codebook
@@ -40,15 +40,7 @@ class DeepTag:
 		rclpy.init(args=args)
 		self.node = rclpy.create_node('deep_tag')
 		deeptag_ros_dir = get_package_share_directory('deeptag_ros')
-		camera_info_topic = "/color/camera_info"
-		self.image_sub   =  message_filters.Subscriber(self.node,CompressedImage,'/color/image_raw/compressed', qos_profile=qos_profile)
-		self.image_info  =  message_filters.Subscriber(self.node,CameraInfo,camera_info_topic, qos_profile=qos_profile)
-		self.ts = message_filters.Cache(self.image_sub, 10)
-		self.ts = message_filters.ApproximateTimeSynchronizer([self.image_sub, self.image_info],100,0.001)
-		self.ts.registerCallback(self.callback)
-		self.tf_broadcaster = TransformBroadcaster(self.node)
 		self.node.declare_parameter('config',os.path.join(deeptag_ros_dir, "config", "config.json"))
-		self.device = None
 		config_filename = self.node.get_parameter('config').get_parameter_value().string_value
 		load_config_flag = False
 		try:
@@ -61,9 +53,21 @@ class DeepTag:
 			self.tag_family = config_dict['family']
 			self.codebook_filename  = config_dict['codebook'] if len(config_dict['codebook']) else os.path.join(deeptag_ros_dir, 'codebook', self.tag_family + '_codebook.txt')
 			self.hamming_dist = config_dict['hamming_dist']
+			camera_info_topic = config_dict['camera_info_topic']
+			camera_topic = config_dict['camera_topic']
+
 			load_config_flag = True
 		except:
 			print('Cannot load config: %s'% config_filename)
+
+		self.image_sub   =  message_filters.Subscriber(self.node,CompressedImage,camera_topic + '/compressed', qos_profile=qos_profile)
+		self.image_info  =  message_filters.Subscriber(self.node,CameraInfo,camera_info_topic, qos_profile=qos_profile)
+		self.ts = message_filters.Cache(self.image_sub, 10)
+		self.ts = message_filters.ApproximateTimeSynchronizer([self.image_sub, self.image_info],100,0.001)
+		self.ts.registerCallback(self.callback)
+		self.tf_broadcaster = TransformBroadcaster(self.node)
+		
+		self.device = None
 		load_model_flag = False
 		try:
 			self.model_detector, self.model_decoder, self.device, self.tag_type, self.grid_size_cand_list = load_deeptag_models(self.tag_family, self.device) 

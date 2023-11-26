@@ -4,5 +4,7 @@
     "family": "apriltag",
     "hamming_dist": 11,
     "codebook": "",
-    "marker_size": 0.149
+    "marker_size": 0.149,
+    "camera_topic": "/color/image_raw",
+    "camera_info_topic": "/color/camera_info"
 }
