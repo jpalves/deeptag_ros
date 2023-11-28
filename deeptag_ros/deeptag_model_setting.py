@@ -3,6 +3,7 @@ from network.detector_net import DetectorNet as detector
 import torch
 import os
 from ament_index_python.packages import get_package_share_directory
+import rclpy
 
 # import time
 def load_deeptag_models(tag_family, device = None):
@@ -70,8 +71,9 @@ def load_deeptag_models(tag_family, device = None):
 
 
     
-
-    print('===========> loading model <===========')
+    
+    #print('=> loading model <=========')
+    rclpy.logging.get_logger('PyTorch').info('==> loading model <==')
     num_masks = 2
     num_channels = 128
     num_channels_refiner = 32
